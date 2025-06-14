@@ -1,0 +1,107 @@
+[
+  {
+    "Texto": "¿Quién fue el primer presidente de México?",
+    "Opciones": [ "Benito Juárez", "Guadalupe Victoria", "Vicente Guerrero", "Agustín de Iturbide" ],
+    "RespuestaCorrecta": "Guadalupe Victoria"
+  },
+  {
+    "Texto": "¿En qué año comenzó la Revolución Mexicana?",
+    "Opciones": [ "1810", "1847", "1910", "1921" ],
+    "RespuestaCorrecta": "1910"
+  },
+  {
+    "Texto": "¿Cuál fue la causa principal de la Primera Guerra Mundial?",
+    "Opciones": [
+      "El asesinato del archiduque Francisco Fernando",
+      "El tratado de Versalles",
+      "La invasión de Polonia",
+      "La guerra de secesión estadounidense"
+    ],
+    "RespuestaCorrecta": "El asesinato del archiduque Francisco Fernando"
+  },
+  {
+    "Texto": "¿Qué imperio construyó el Coliseo en Roma?",
+    "Opciones": [ "Imperio Bizantino", "Imperio Otomano", "Imperio Romano", "Imperio Griego" ],
+    "RespuestaCorrecta": "Imperio Romano"
+  },
+  {
+    "Texto": "¿Quién fue el líder del movimiento de independencia en la India?",
+    "Opciones": [ "Jawaharlal Nehru", "Mahatma Gandhi", "Indira Gandhi", "Subhas Chandra Bose" ],
+    "RespuestaCorrecta": "Mahatma Gandhi"
+  },
+  {
+    "Texto": "¿Qué civilización construyó Machu Picchu?",
+    "Opciones": [ "Azteca", "Maya", "Inca", "Tolteca" ],
+    "RespuestaCorrecta": "Inca"
+  },
+  {
+    "Texto": "¿Qué país fue dividido por el Muro de Berlín?",
+    "Opciones": [ "Alemania", "Francia", "Polonia", "Austria" ],
+    "RespuestaCorrecta": "Alemania"
+  },
+  {
+    "Texto": "¿Quién escribió la 'Declaración de Independencia' de Estados Unidos?",
+    "Opciones": [ "George Washington", "Benjamin Franklin", "Thomas Jefferson", "John Adams" ],
+    "RespuestaCorrecta": "Thomas Jefferson"
+  },
+  {
+    "Texto": "¿Cuál fue el nombre del tratado que terminó la Primera Guerra Mundial?",
+    "Opciones": [ "Tratado de Versalles", "Tratado de París", "Tratado de Tordesillas", "Tratado de Utrecht" ],
+    "RespuestaCorrecta": "Tratado de Versalles"
+  },
+  {
+    "Texto": "¿Qué evento marcó el inicio de la Segunda Guerra Mundial?",
+    "Opciones": [ "El ataque a Pearl Harbor", "La invasión de Polonia", "La guerra civil española", "La caída de Francia" ],
+    "RespuestaCorrecta": "La invasión de Polonia"
+  },
+  {
+    "Texto": "¿En qué fecha se firmó la Constitución de 1917?",
+    "Opciones": [
+      "5 de mayo de 1917",
+      "5 de febrero de 1917",
+      "5 de febrero de 1920",
+      "5 de mayo de 1920"
+    ],
+    "RespuestaCorrecta": "5 de febrero de 1917"
+  },
+  {
+    "Texto": "¿Cuánto tiempo duró la guerra de los 100 años?",
+    "Opciones": [
+      "90 años",
+      "115 años",
+      "100 años",
+      "116 años"
+    ],
+    "RespuestaCorrecta": "116 años"
+  },
+  {
+    "Texto": "¿Quién fue el primer hombre en caminar sobre la luna?",
+    "Opciones": [
+      "Buzz Aldrin",
+      "Alan Armstrong",
+      "Alan Shepard",
+      "Neil Armstrong"
+    ],
+    "RespuestaCorrecta": "Neil Armstrong"
+  },
+  {
+    "Texto": "¿Dónde nació Adolf Hitler?",
+    "Opciones": [
+      "Austria",
+      "Alemania",
+      "Rusia",
+      "Polonia"
+    ],
+    "RespuestaCorrecta": "Austria"
+  },
+  {
+    "Texto": "¿Qué ciudades fueron bombardeadas con bombas atómicas en 1945?",
+    "Opciones": [
+      "Hiroshima y Nagasaki",
+      "Hiroshima y Tokio",
+      "Yokohama y Tokio",
+      "Tokio y Nagasaki"
+    ],
+    "RespuestaCorrecta": "Hiroshima y Nagasaki"
+  }
+]

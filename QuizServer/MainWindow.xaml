@@ -1,0 +1,81 @@
+﻿<Window x:Class="QuizServer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuizServer"
+        xmlns:controls="clr-namespace:QuizServer.Controls"
+        xmlns:vm="clr-namespace:ServidorUDP.ViewModels"
+        mc:Ignorable="d"
+        Title="Quiz Server" Height="600" Width="800">
+    <Window.DataContext>
+        <vm:ServidorViewModel/>
+    </Window.DataContext>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0 0 0 10">
+            <Button Content="Iniciar Servidor" Command="{Binding IniciarCommand}" Margin="0 0 10 0"/>
+            <Button Content="Detener Servidor" Command="{Binding DetenerCommand}" Margin="0 0 10 0"/>
+            <Button Content="Iniciar Cuestionario" Command="{Binding IniciarCuestionarioCommand}"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Text="{Binding Estado}" FontWeight="Bold" Margin="0 0 0 10"/>
+        <TextBlock Grid.Row="1" Text="{Binding IP}" FontStyle="Italic" Margin="150 0 0 10"/>
+
+        <controls:TimerControl x:Name="TimerControl" Grid.Row="2" Margin="0 0 0 10"/>
+
+        <StackPanel Grid.Row="3" Margin="0 0 0 10">
+            <TextBlock Text="Pregunta Actual:" FontWeight="Bold"/>
+            <TextBlock Text="{Binding PreguntaActual}" FontSize="16" TextWrapping="Wrap" Margin="0 5 0 0"/>
+        </StackPanel>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ListBox Grid.Column="0" ItemsSource="{Binding Opciones}" Margin="0 0 10 0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Margin="5"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Grid.Column="1" Width="200">
+                <TextBlock Text="Usuarios Conectados:" FontWeight="Bold" Margin="0 0 0 5"/>
+                <ListBox ItemsSource="{Binding UsuariosConectados}" Height="200">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Nombre}" Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Puntuacion, StringFormat='({0} pts)'}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="5" Margin="0 10 0 0">
+            <TextBlock Text="Resultados de la Pregunta:" FontWeight="Bold" Margin="0 0 0 5"/>
+            <TextBlock Text="{Binding ResultadosPreguntaActual}" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Margin="0 10 0 0">
+            <TextBlock Text="Mensajes del Servidor:" FontWeight="Bold" Margin="0 0 0 5"/>
+            <ListBox ItemsSource="{Binding MensajesRecibidos}" Height="100"/>
+        </StackPanel>
+    </Grid>
+</Window>
