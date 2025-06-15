@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using QuizServer.Model;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace QuizServer.Service
 {
@@ -175,19 +176,27 @@ namespace QuizServer.Service
             }
         }
 
-
-        public void EnviarPregunta( PreguntaModel pregunta)
+        public void EnviarPregunta(PreguntaModel pregunta)
         {
             Task.Run(async () =>
             {
                 respuestasHabilitadas = false;
 
-                string texto =  string.Join("|",pregunta.Opciones);
-                var datos = Encoding.UTF8.GetBytes(texto);
+                // Serializar la pregunta completa a JSON
+                var preguntaJson = JsonSerializer.Serialize(new
+                {
+                    Tipo = "Pregunta",
+                    Texto = pregunta.Texto,
+                    Opciones = pregunta.Opciones,
+                    RespuestaCorrecta = pregunta.RespuestaCorrecta
+                });
+
+                var datos = Encoding.UTF8.GetBytes(preguntaJson);
                 foreach (var c in ClientesRegistrados)
-                    servidorUdp.Send(datos, datos.Length, c);
-                string mensaje = string.Join("|", pregunta.Opciones);
-                EnviarBroadcast(mensaje);
+                    servidorUdp?.Send(datos, datos.Length, c);
+
+                // También enviar por broadcast para nuevos clientes
+                EnviarBroadcast(preguntaJson);
 
                 AlRecibirMensaje?.Invoke("[SERVIDOR] Pregunta enviada. Esperando...");
 
@@ -200,8 +209,6 @@ namespace QuizServer.Service
             });
         }
 
-
-
         /// <summary>
         /// Enviar mensaje UDP al cliente especificado.
         /// </summary>
@@ -210,7 +217,7 @@ namespace QuizServer.Service
             if (servidorUdp == null) return;
 
             byte[] datos = Encoding.UTF8.GetBytes(mensaje);
-            servidorUdp.Send(datos, datos.Length, destino);
+            servidorUdp?.Send(datos, datos.Length, destino);
         }
 
         /// <summary>
@@ -221,7 +228,7 @@ namespace QuizServer.Service
             if (servidorUdp == null) return;
 
             byte[] datos = Encoding.UTF8.GetBytes(mensaje);
-            servidorUdp.Send(datos, datos.Length, new IPEndPoint(IPAddress.Broadcast, puerto));
+            servidorUdp?.Send(datos, datos.Length, new IPEndPoint(IPAddress.Broadcast, puerto));
         }
     }
-}
+}

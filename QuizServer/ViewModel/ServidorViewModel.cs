@@ -15,7 +15,7 @@ namespace ServidorUDP.ViewModels
 {
     public class ServidorViewModel : INotifyPropertyChanged
     {
-        private  ServidorUdpService? servidor;
+        private ServidorUdpService? servidor;
         private int indicePregunta = 0;
         private TimerControl? timerControl;
         private string respuestaCorrectaActual = "";
@@ -55,6 +55,7 @@ namespace ServidorUDP.ViewModels
                 {
                     string json = File.ReadAllText(ruta);
                     preguntas = JsonSerializer.Deserialize<PreguntaModel[]>(json) ?? Array.Empty<PreguntaModel>();
+                    
                 }
                 else
                 {
@@ -69,8 +70,6 @@ namespace ServidorUDP.ViewModels
 
         public ServidorViewModel()
         {
-
-
             IniciarCommand = new RelayCommand(IniciarServidor);
             DetenerCommand = new RelayCommand(DetenerServidor);
             IniciarCuestionarioCommand = new RelayCommand(IniciarCuestionario, () => servidor != null);
@@ -96,21 +95,22 @@ namespace ServidorUDP.ViewModels
 
             servidor = new ServidorUdpService();
             IP = servidor.IP;
-            servidor.AlNuevoCliente += (cliente) =>
-            {
-                // Mostrar información detallada del cliente
-                string mensaje = $"[INFO] Nuevo cliente conectado:\n" +
-                               $"  IP: {cliente.Address}\n" +
-                               $"  Puerto: {cliente.Port}\n" +
-                               $"  Dirección completa: {cliente}";
-                MensajesRecibidos.Add(mensaje);
-            };
+            //servidor.AlNuevoCliente += (cliente) =>
+            //{
+            //    // Mostrar información detallada del cliente
+            //    string mensaje = $"[INFO] Nuevo cliente conectado:\n" +
+            //                   $"  IP: {cliente.Address}\n" +
+            //                   $"  Puerto: {cliente.Port}\n" +
+            //                   $"  Dirección completa: {cliente}";
+            //    MensajesRecibidos.Add(mensaje);
+            //};
 
             servidor.AlIniciar += () => Estado = "Servidor en ejecución";
             servidor.AlTenerDetenerse += () => Estado = "Servidor detenido";
             servidor.AlRecibirMensaje += ProcesarMensajeCliente;
+            servidor?.EnviarPregunta(preguntas[indicePregunta]);
 
-            servidor.Iniciar();
+            servidor?.Iniciar();
             OnCanExecuteChanged();
         }
 
@@ -118,8 +118,8 @@ namespace ServidorUDP.ViewModels
         {
             try
             {
-                var paquete = JsonSerializer.Deserialize<dynamic>(mensaje);
-                string tipo = paquete.GetProperty("Tipo").GetString();
+                var paquete = JsonSerializer.Deserialize<JsonElement>(mensaje);
+                string tipo = paquete.GetProperty("Tipo").GetString() ?? "";
 
                 switch (tipo)
                 {
