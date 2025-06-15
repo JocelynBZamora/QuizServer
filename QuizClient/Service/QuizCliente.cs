@@ -40,7 +40,7 @@ namespace QuizzCliente.Services
             }
             catch (Exception ex)
             {
-                AlTenerError?.Invoke($"❌ Error al iniciar cliente: {ex.Message}");
+                AlTenerError?.Invoke($"Error al iniciar cliente: {ex.Message}");
             }
         }
 
@@ -84,7 +84,7 @@ namespace QuizzCliente.Services
             }
             catch (Exception ex)
             {
-                AlTenerError?.Invoke($"❌ Error al escuchar: {ex.Message}");
+                AlTenerError?.Invoke($"Error al escuchar: {ex.Message}");
             }
         }
 
