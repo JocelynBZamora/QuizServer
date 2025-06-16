@@ -55,7 +55,7 @@ namespace ServidorUDP.ViewModels
                 {
                     string json = File.ReadAllText(ruta);
                     preguntas = JsonSerializer.Deserialize<PreguntaModel[]>(json) ?? Array.Empty<PreguntaModel>();
-                    
+
                 }
                 else
                 {
@@ -116,28 +116,32 @@ namespace ServidorUDP.ViewModels
 
         private void ProcesarMensajeCliente(string mensaje)
         {
-            try
+            App.Current.Dispatcher.Invoke(() =>
             {
-                var paquete = JsonSerializer.Deserialize<JsonElement>(mensaje);
-                string tipo = paquete.GetProperty("Tipo").GetString() ?? "";
 
-                switch (tipo)
+                try
                 {
-                    case "Registro":
-                        ProcesarRegistro(paquete);
-                        break;
-                    case "Respuesta":
-                        ProcesarRespuesta(paquete);
-                        break;
-                    case "Pregunta":
-                        ProcesarRespuesta(paquete);
-                        break;
+                    var paquete = JsonSerializer.Deserialize<JsonElement>(mensaje);
+                    string tipo = paquete.GetProperty("Tipo").GetString() ?? "";
+
+                    switch (tipo)
+                    {
+                        case "Registro":
+                            ProcesarRegistro(paquete);
+                            break;
+                        case "Respuesta":
+                            ProcesarRespuesta(paquete);
+                            break;
+                        case "Pregunta":
+                            ProcesarRespuesta(paquete);
+                            break;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MensajesRecibidos.Add($"[ERROR] Error al procesar mensaje: {ex.Message}");
-            }
+                catch (Exception ex)
+                {
+                    MensajesRecibidos.Add($"[ERROR] Error al procesar mensaje: {ex.Message}");
+                }
+            });
         }
 
         private void ProcesarRegistro(JsonElement paquete)
