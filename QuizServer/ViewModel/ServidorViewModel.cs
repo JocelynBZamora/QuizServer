@@ -108,7 +108,6 @@ namespace ServidorUDP.ViewModels
             servidor.AlIniciar += () => Estado = "Servidor en ejecución";
             servidor.AlTenerDetenerse += () => Estado = "Servidor detenido";
             servidor.AlRecibirMensaje += ProcesarMensajeCliente;
-            servidor?.EnviarPregunta(preguntas[indicePregunta]);
 
             servidor?.Iniciar();
             OnCanExecuteChanged();
@@ -226,6 +225,8 @@ namespace ServidorUDP.ViewModels
                 }
             }
             MostrarPregunta(indicePregunta);
+            servidor?.EnviarPregunta(preguntas[indicePregunta]);
+
         }
 
         private void MostrarPregunta(int indice)
