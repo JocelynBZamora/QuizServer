@@ -129,6 +129,9 @@ namespace ServidorUDP.ViewModels
                     case "Respuesta":
                         ProcesarRespuesta(paquete);
                         break;
+                    case "Pregunta":
+                        ProcesarRespuesta(paquete);
+                        break;
                 }
             }
             catch (Exception ex)

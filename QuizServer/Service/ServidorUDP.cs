@@ -165,6 +165,24 @@ namespace QuizServer.Service
 
                     AlRecibirMensaje?.Invoke($"[RESPUESTA] {nombre}: {respuesta}");
                 }
+                else if (tipo == "Pregunta")
+                {
+                    string texto = root.GetProperty("Texto").GetString() ?? "";
+                    string[] opciones = root.GetProperty("Opciones")
+                                            .EnumerateArray()
+                                            .Select(x => x.GetString() ?? "")
+                                            .ToArray();
+                    string respuestaCorrecta = root.GetProperty("RespuestaCorrecta").GetString() ?? "";
+
+                    var pregunta = new PreguntaModel
+                    {
+                        Texto = texto,
+                        Opciones = opciones,
+                        RespuestaCorrecta = respuestaCorrecta
+                    };
+
+                }
+
             }
             catch (JsonException)
             {
