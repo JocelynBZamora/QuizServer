@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ClienteQuiz.Model
 {
     public class RespuestaClienteModel
-    {
+    { // probando
         public string Nombre { get; set; } = null!;
         public string Respuesta { get; set; } = null!;
     }
